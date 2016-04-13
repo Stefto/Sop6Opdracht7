@@ -6,13 +6,19 @@ public class Main {
         
         Computer c = new Computer();
         
-        c.AddPart(new Part(PartType.Casing, "Cooler Master Centurion 6", 49.50, "Midi tower"));
-        c.AddPart(new Part(PartType.Processor, "Intel i7-4790", 295.0, 3.6));
-        c.AddPart(new Part(PartType.Memory, "G.SKILL Ripjaws X Series", 99.99, "DDR3", 16));
-        c.AddPart(new Part(PartType.Motherboard, "MSI H97 PC MATE - Socket 1150 - ATX", 89.0));
+        Casing casing = new Casing(PartType.Casing, "Cooler Master Centurion 6", 49.50, "Midi tower");
+        Processor processor = new Processor(PartType.Processor, "Intel i7-4790", 295.0, 3.6);
+        Memory memory = new Memory(PartType.Memory, "G.SKILL Ripjaws X Series", 99.99, "DDR3", 16);
+        Motherboard motherboard = new Motherboard(PartType.Motherboard, "MSI H97 PC MATE - Socket 1150 - ATX", 89.0);
+        
+        c.AddPart(casing);
+        c.AddPart(processor);
+        c.AddPart(memory);
+        c.AddPart(motherboard);
         
         if (c.IsComplete()) {
-            System.out.println("Total price is EUR " + c.GetPrice());
+            double price = c.GetPrice();
+            System.out.println("Total price is EUR " + price);
         }
         else {
             System.out.println("Your computer is not ready yet...");

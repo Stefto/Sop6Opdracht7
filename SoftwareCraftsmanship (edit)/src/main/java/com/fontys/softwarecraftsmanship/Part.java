@@ -10,10 +10,22 @@ public class Part {
     private double speed = -1.0;
     
     public Part(PartType type, String title, double price, String subtype, int size, double speed) {
-        this(type,title,price,subtype,size);
+        //this(type,title,price,subtype,size);
+        this.type = type;
+        this.title = title;
+        this.price = price;
+        this.subtype = subtype;
+        this.size = size;
         this.speed = speed;
     }
     
+    public Part(PartType type, String title, double price) {
+        this.type = type;
+        this.title = title;
+        this.price = price;
+    }
+    
+    /*
     // Memory
     public Part(PartType type, String title, double price, String subtype, int size) {
         this(type,title,price,subtype);
@@ -40,6 +52,7 @@ public class Part {
         this.title = title;
         this.price = price;
     }
+    */
     
     public PartType GetType() {
         return type;

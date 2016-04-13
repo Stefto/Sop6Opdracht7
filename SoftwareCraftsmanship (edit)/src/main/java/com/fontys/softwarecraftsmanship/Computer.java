@@ -57,7 +57,7 @@ public class Computer {
             }
         }
         
-        //not zo heel erg elegant, maar sta open voor suggesties
         return !(!hasCasing || !hasProcessor || !hasMemory || !hasMotherboard);
     }
+    
 }
