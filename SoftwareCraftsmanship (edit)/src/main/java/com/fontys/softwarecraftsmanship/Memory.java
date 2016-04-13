@@ -14,8 +14,8 @@ public class Memory extends Part {
     private String subtype;
     private int size;
 
-    public Memory(PartType type, String title, double price, String subtype, int size) {
-        super(type, title, price);
+    public Memory(String title, double price, String subtype, int size) {
+        super(title, price);
         this.subtype = subtype;
         this.size = size;
     }

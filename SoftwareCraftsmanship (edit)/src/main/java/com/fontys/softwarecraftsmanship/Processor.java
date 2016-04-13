@@ -13,8 +13,8 @@ public class Processor extends Part {
 
     private double speed;
     
-    public Processor(PartType type, String title, double price, double speed) {
-        super(type, title, price);
+    public Processor(String title, double price, double speed) {
+        super(title, price);
         this.speed = speed;
     }
     

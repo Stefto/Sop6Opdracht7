@@ -13,9 +13,9 @@ public class ComputerTest {
      */
     @org.junit.Test
     public void testAddZeroParts() {
-        Computer c = new Computer();
+        Computer computer = new Computer();
         
-        assertEquals(0, c.NumberOfParts());
+        assertEquals(0, computer.NumberOfParts());
     }
 
     /**
@@ -23,11 +23,11 @@ public class ComputerTest {
      */
     @org.junit.Test
     public void testAddOnePart() {
-        Part p = new Part(PartType.Casing, "", 0.0);
-        Computer c = new Computer();
-        c.AddPart(p);
+        Part p = new Part("", 0.0);
+        Computer computer = new Computer();
+        computer.AddPart(p);
         
-        assertEquals(1, c.NumberOfParts());
+        assertEquals(1, computer.NumberOfParts());
     }
 
     /**
@@ -36,14 +36,14 @@ public class ComputerTest {
     @org.junit.Test
     public void testAddMoreParts() {
         final int PARTS_COUNT = 10;
-        Computer c = new Computer();
+        Computer computer = new Computer();
         
         for (int i = 0; i < PARTS_COUNT; i++) {
-            assertEquals(i, c.NumberOfParts());
-            c.AddPart(new Part(PartType.Casing, "", 0.0));
+            assertEquals(i, computer.NumberOfParts());
+            computer.AddPart(new Part("", 0.0));
         }
         
-        assertEquals(PARTS_COUNT, c.NumberOfParts());
+        assertEquals(PARTS_COUNT, computer.NumberOfParts());
     }
 
     /**
@@ -51,11 +51,11 @@ public class ComputerTest {
      */
     @org.junit.Test
     public void testAddNullPart() {
-        Computer c = new Computer();
+        Computer computer = new Computer();
         
-        c.AddPart(null);
+        computer.AddPart(null);
         
-        assertEquals(0, c.NumberOfParts());
+        assertEquals(0, computer.NumberOfParts());
     }
 
     /**
@@ -64,11 +64,11 @@ public class ComputerTest {
     @org.junit.Test
     public void testAddNullParts() {
         final int PARTS_COUNT = 10;
-        Computer c = new Computer();
+        Computer computer = new Computer();
         
         for (int i = 0; i < PARTS_COUNT; i++) {
-            c.AddPart(null);
-            assertEquals(0, c.NumberOfParts());
+            computer.AddPart(null);
+            assertEquals(0, computer.NumberOfParts());
         }
     }
 
@@ -77,9 +77,9 @@ public class ComputerTest {
      */
     @org.junit.Test
     public void testGetEmptyComputerPrice() {
-        Computer c = new Computer();
+        Computer computer = new Computer();
         
-        assertEquals(0.0, c.GetPrice(), 0.0);
+        assertEquals(0.0, computer.GetPrice(), 0.0);
     }
 
     /**
@@ -88,11 +88,11 @@ public class ComputerTest {
     @org.junit.Test
     public void testGetOnePartComputerPrice() {
         final double EXPECTED_PRICE = 10.0;
-        Computer c = new Computer();
+        Computer computer = new Computer();
         
-        c.AddPart(new Part(PartType.Casing, "", 10.0));
+        computer.AddPart(new Part("", 10.0));
         
-        assertEquals(EXPECTED_PRICE, c.GetPrice(), 0.0);
+        assertEquals(EXPECTED_PRICE, computer.GetPrice(), 0.0);
     }
 
     /**
@@ -106,7 +106,7 @@ public class ComputerTest {
         Computer c = new Computer();
         
         for (int i = 0; i < PARTS_COUNT; i++) {
-            c.AddPart(new Part(PartType.Casing, "", PART_PRICE));
+            c.AddPart(new Part("", PART_PRICE));
             expectedPrice += PART_PRICE;
         }
         
@@ -118,9 +118,9 @@ public class ComputerTest {
      */
     @org.junit.Test
     public void testEmptyComputerIsIncomplete() {
-        Computer c = new Computer();
+        Computer computer = new Computer();
         
-        assertEquals(false, c.IsComplete());
+        assertEquals(false, computer.IsComplete());
     }
 
     /**
@@ -128,11 +128,11 @@ public class ComputerTest {
      */
     @org.junit.Test
     public void testOnePartComputerIsIncomplete() {
-        Computer c = new Computer();
+        Computer computer = new Computer();
         
-        c.AddPart(new Part(PartType.Casing, "", 0.0));
+        computer.AddPart(new Part("", 0.0));
         
-        assertEquals(false, c.IsComplete());
+        assertEquals(false, computer.IsComplete());
     }
 
     /**
@@ -140,15 +140,15 @@ public class ComputerTest {
      */
     @org.junit.Test
     public void testMorePartsComputerIsIncomplete() {
-        Computer c = new Computer();
+        Computer computer = new Computer();
         
-        c.AddPart(new Part(PartType.Casing, "", 0.0));
-        c.AddPart(new Part(PartType.Casing, "", 0.0));
-        c.AddPart(new Part(PartType.Casing, "", 0.0));
-        c.AddPart(new Part(PartType.Casing, "", 0.0));
-        c.AddPart(new Part(PartType.Casing, "", 0.0));
+        computer.AddPart(new Part("", 0.0));
+        computer.AddPart(new Part("", 0.0));
+        computer.AddPart(new Part("", 0.0));
+        computer.AddPart(new Part("", 0.0));
+        computer.AddPart(new Part("", 0.0));
         
-        assertEquals(false, c.IsComplete());
+        assertEquals(false, computer.IsComplete());
     }
 
     /**
@@ -156,14 +156,19 @@ public class ComputerTest {
      */
     @org.junit.Test
     public void testComputerIsComplete() {
-        Computer c = new Computer();
+        Computer computer = new Computer();
         
-        c.AddPart(new Part(PartType.Casing, "", 0.0, ""));
-        c.AddPart(new Part(PartType.Motherboard, "", 0.0));
-        c.AddPart(new Part(PartType.Processor, "", 0.0, 0.0));
-        c.AddPart(new Part(PartType.Memory, "", 0.0, "",0));
+        Casing casing = new Casing("", 0.0, "");
+        Motherboard motherboard = new Motherboard("", 0.0);
+        Processor processor = new Processor("", 0.0, 0.0);
+        Memory memory = new Memory("", 0.0, "", 0);
         
-        assertEquals(true, c.IsComplete());
+        computer.AddPart(casing);
+        computer.AddPart(processor);
+        computer.AddPart(memory);
+        computer.AddPart(motherboard);
+        
+        assertEquals(true, computer.IsComplete());
     }
 
     /**
@@ -173,22 +178,26 @@ public class ComputerTest {
     public void testComputerIsIncomplete() {
         
         for (int i = 0; i < 4; i++) {
-            Computer c = new Computer();
+            Computer computer = new Computer();
 
             if (i != 0) {
-                c.AddPart(new Part(PartType.Casing, "", 0.0, ""));
+                Casing casing = new Casing("", 0.0, "");
+                computer.AddPart(casing);
             }
             if (i != 1) {
-                c.AddPart(new Part(PartType.Motherboard, "", 0.0));
+                Motherboard motherboard = new Motherboard("", 0.0);
+                computer.AddPart(motherboard);
             }
             if (i != 2) {
-                c.AddPart(new Part(PartType.Processor, "", 0.0, 0.0));
+                Processor processor = new Processor("", 0.0, 0.0);
+                computer.AddPart(processor);
             }
             if (i != 3) {
-                c.AddPart(new Part(PartType.Memory, "", 0.0, "", 0));
+                Memory memory = new Memory("", 0.0, "", 0);
+                computer.AddPart(memory);
             }
 
-            assertEquals(false, c.IsComplete());
+            assertEquals(false, computer.IsComplete());
         }
     }
 }

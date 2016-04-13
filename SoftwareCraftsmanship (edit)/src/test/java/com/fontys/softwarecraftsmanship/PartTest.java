@@ -13,13 +13,19 @@ public class PartTest {
         final double DEFAULT_PRICE = 10.0;
         List<Part> parts = new ArrayList<>();
         
-        parts.add(new Part(PartType.Casing, "", DEFAULT_PRICE, "", 0));
-        parts.add(new Part(PartType.Processor, "", DEFAULT_PRICE, 0.0));
-        parts.add(new Part(PartType.Memory, "", DEFAULT_PRICE, "", 0));
-        parts.add(new Part(PartType.Motherboard, "", DEFAULT_PRICE));
+        Casing casing = new Casing("", DEFAULT_PRICE, "");
+        Processor processor = new Processor("", DEFAULT_PRICE, 0.0);
+        Memory memory = new Memory("", DEFAULT_PRICE, "", 0);
+        Motherboard motherboard = new Motherboard("", DEFAULT_PRICE);
         
-        for (Part p : parts) {
-            assertEquals(DEFAULT_PRICE, p.GetPrice(), 0.0);
+        parts.add(casing);
+        parts.add(processor);
+        parts.add(memory);
+        parts.add(motherboard);
+        
+        
+        for (Part part : parts) {
+            assertEquals(DEFAULT_PRICE, part.GetPrice(), 0.0);
         }
     }
 }

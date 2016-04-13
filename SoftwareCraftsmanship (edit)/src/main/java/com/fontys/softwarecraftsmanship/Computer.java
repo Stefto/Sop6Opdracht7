@@ -5,59 +5,58 @@ import java.util.*;
 public class Computer {
 
     List<Part> parts;
+    private boolean hasCasing = false;
+    private boolean hasProcessor = false;
+    private boolean hasMemory = false;
+    private boolean hasMotherboard = false;
+    double price;
 
-    public Computer(){
+    public Computer() {
         parts = new ArrayList<>();
+        price = 0.0;
     }
-    
-    public Computer(List<Part> parts){
+
+    public Computer(List<Part> parts) {
         this.parts = parts;
     }
-    
+
     public int NumberOfParts() {
-        return parts.size() - 1;
+        return parts.size();
     }
 
-    public void AddPart(Part p) {
-        parts.add(p);
+    public void AddPart(Part part) {
+        parts.add(part);
+        price += part.GetPrice();
     }
 
     public double GetPrice() {
-        double price = 0.0;
-
-        for (Part part : parts) {
-            price += part.GetPrice();
-        }
-
         return price;
     }
 
     public boolean IsComplete() {
-        boolean hasCasing = false;
-        boolean hasProcessor = false;
-        boolean hasMemory = false;
-        boolean hasMotherboard = false;
-        
+
         for (Part part : parts) {
-            switch (part.GetType()) {
-                case Casing:
-                    hasCasing = true;
-                    break;
-                case Processor:
-                    hasProcessor = true;
-                    break;
-                case Memory:
-                    hasMemory = true;
-                    break;
-                case Motherboard:
-                    hasMotherboard = true;
-                    break;
-                default:
-                    break;
-            }
+            checkPart(part);
         }
-        
         return !(!hasCasing || !hasProcessor || !hasMemory || !hasMotherboard);
     }
-    
+
+    public void checkPart(Part part) {
+        if (part instanceof Casing) {
+            hasCasing = true;
+        }
+
+        if (part instanceof Processor) {
+            hasProcessor = true;
+        }
+
+        if (part instanceof Memory) {
+            hasMemory = true;
+        }
+
+        if (part instanceof Motherboard) {
+            hasMotherboard = true;
+        }
+    }
+
 }
